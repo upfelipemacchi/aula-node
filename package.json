@@ -4,7 +4,7 @@
   "description": "Primeiro projeto Node.js",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon main.js",
+    "start": "nodemon ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Felipe",
@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.18.1",
     "mongodb": "^4.6.0",
+    "mongoose": "^5.12.10",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16"
   }

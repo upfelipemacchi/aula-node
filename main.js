@@ -1,20 +1,40 @@
 const express = require("express");
 const morgan = require("morgan");
-
 const produtos = require("./produtos.json");
 
 const servidor = express();
 servidor.use(morgan("dev"));
-servidor.use(express.urlencoded({ "extended": true }));
-servidor.use(express.json());
+servidor.use(express.urlencoded({ extended: true }));
 
-const get = (req, res) => res.send("Servidor Express (GET)");
+function get(req, res) {
+    res.send("Servidor express (get)");
+}
 
-const getProdutos = (req, res) => res.json(produtos);
+function getProdutos(req, res) {
+    res.json(produtos);
+}
 
 servidor.get("/", get);
-servidor.get("/produtos", getProdutosclear);
+servidor.get("/produtos", getProdutos);
 
-const log = () => console.log("Servidor Express rodando na porta 3000");
+function log() {
+    console.log("Servidor express rodando na porta 3000");
+}
 
 servidor.listen(3000, log);
+
+require("./db/mongodb");
+const produtoModel = require("./models/produtoModel");
+
+const produto = {
+    nome: "Smartphone",
+    desc: "Google Pixel",
+    preco: 4000
+}
+
+async function gravarDados() {
+    const resultado = await produtoModel.create(produto);
+    console.log(resultado);
+}
+
+gravarDados();
